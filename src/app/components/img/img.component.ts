@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, AfterViewInit, OnDestroy, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-img',
@@ -6,10 +6,20 @@ import { Component, Input, OnInit, Output, EventEmitter, OnChanges, AfterViewIni
   styleUrls: ['./img.component.scss']
 })
 export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+  img: string = '';
 
-  @Input() img: string = '';
+  @Input('img')
+  set changeImg(newImg: string) {
+    this.img = newImg;
+    // se ejecuta codigo solo cuando cambia la imagen
+    // console.log('change just img =>', this.img);
+  }
+
+  @Input() alt: string = '';
   @Output() loaded = new EventEmitter<string>();
   imageDefault = '../../../assets/images/default-image.jpg';
+  counter = 0;
+  counterFn: number | undefined;
 
   /* VIDA DE LOS COMPONENTES */
   constructor() {
@@ -19,9 +29,10 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
     Solo corre una vez
     */
     console.log('constructor', 'imgValue =>', this.img);
+
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     /*
     Corre antes del render
     Cualquier escucha de cambios en inputs va en este metodo y no en el ngOnInit()
@@ -29,6 +40,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
     Corre las veces que se actualicen los inputs
     */
     console.log('ngOnChanges', 'imgValue =>', this.img);
+    console.log('changes', changes);
   }
 
   ngOnInit(): void {
@@ -38,6 +50,10 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
     Solo corre una vez
     */
     console.log('ngOnInit', 'imgValue =>', this.img);
+    this.counterFn = window.setInterval(() => {
+      this.counter++;
+      console.log('run counter');
+    }, 1000);
   }
 
   ngAfterViewInit(): void {
@@ -51,6 +67,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   ngOnDestroy(): void {
     /* Cuando se elimina el componente */
     console.log('ngOnDestroy');
+    window.clearInterval(this.counterFn);
   }
 
   imgError() {
