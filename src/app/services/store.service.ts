@@ -12,8 +12,6 @@ export class StoreService {
   constructor() { }
 
   addProduct(product: Product): void {
-    console.log(product);
-    console.log('XDS');
     this.myShoppingCart.push(product);
   }
 
