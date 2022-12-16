@@ -16,7 +16,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   }
 
   @Input() alt: string = '';
-  @Output() loaded = new EventEmitter<string>();
+  @Output() loadedImg = new EventEmitter<string>();
   imageDefault = '../../../assets/images/default-image.jpg';
   // counter = 0;
   // counterFn: number | undefined;
@@ -25,7 +25,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   constructor() {
     /*
     Corre antes del render
-    No se deben correr cosas asincronas(cosas que no tiene que esperar un valor(ejm fetch) sino son imediatas)
+    No se deben correr cosas asincronas(cosas que tienen que esperar un valor ejm fetch), solo cosas imediatas
     Solo corre una vez
     */
     console.log('constructor', 'imgValue =>', this.img);
@@ -40,7 +40,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
     Corre las veces que se actualicen los inputs
     */
     console.log('ngOnChanges', 'imgValue =>', this.img);
-    console.log('changes', changes);
+    // console.log('changes', changes);
   }
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
     Se corren cosas asincronas(cosas que esperan un tiempo para recibir su valor)
     Solo corre una vez
     */
-    // console.log('ngOnInit', 'imgValue =>', this.img);
+    console.log('ngOnInit', 'imgValue =>', this.img);
     // this.counterFn = window.setInterval(() => {
     //   this.counter++;
     //   console.log('run counter');
@@ -75,8 +75,8 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   }
 
   imgLoaded() {
-    console.log('log hijo');
-    this.loaded.emit(this.img);
+    // console.log('log hijo');
+    this.loadedImg.emit(this.img);
   }
 
 }
