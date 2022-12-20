@@ -1,4 +1,4 @@
 <app-img [img]="product.image" (loadedImg)="imgCargada($event)"></app-img>
-<h2>{{product.price}}</h2>
-<p>{{product.title}}</p>
+<h2>{{product.price | currency: 'MX'}}</h2>
+<p>{{product.title | reverse}}</p>
 <button (click)="onAddToCart()">Add cart</button>

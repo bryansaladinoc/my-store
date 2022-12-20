@@ -1,5 +1,12 @@
 <p>La cantidad {{ myShoppingCart.length }}</p>
-<p>Total ${{total}}</p>
+<p>Total ${{ total }}</p>
+<p>Today: {{ today | date : "short" }}</p>
+<p>Today: {{ today | timeAgo }}</p>
+<p>Otra fecha: {{ today | date : "yyyy.dd.MM" }}</p>
+<p>
+  {{ "Hola BdKdNldsdfsKSdADF" | uppercase }}
+</p>
+<p>{{'Messi CampEón del Mundo' | vocalToNumber}}</p>
 
 <div class="products--grid">
   <app-product
