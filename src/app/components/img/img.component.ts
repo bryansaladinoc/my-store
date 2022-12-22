@@ -29,15 +29,14 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
     Solo corre una vez
     */
     console.log('constructor', 'imgValue =>', this.img);
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     /*
     Corre antes del render
-    Cualquier escucha de cambios en inputs va en este metodo y no en el ngOnInit()
-    Visualiza cambios en los inputs
-    Corre las veces que se actualicen los inputs
+    Cualquier escucha de cambios en @Input va en este metodo y no en el ngOnInit()
+    Visualiza cambios en los @Input
+    Corre las veces que se actualicen los @Input
     */
     console.log('ngOnChanges', 'imgValue =>', this.img);
     // console.log('changes', changes);
